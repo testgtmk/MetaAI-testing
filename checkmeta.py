@@ -4,7 +4,6 @@ from dotenv import load_dotenv
 import os
 import time
 
-ai = MetaAI()
 promptIntro = ""
 ques =  "Account for the change in the spatial pattern of the Iron and Steel industry in the world. "
 msg = "This question was asked in CSE Mains. Give me approach, keywords and answer of this question. Use data, reports, supreme court judgements to make it more enriching. \n "
@@ -16,6 +15,7 @@ while tc < 5:
     tc += 1
     print(tc)
     try:
+        ai = MetaAI()
         response = ai.prompt(message=msg)
         #print(response["message"])
         ans = response["message"]
