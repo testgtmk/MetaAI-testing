@@ -20,9 +20,8 @@ while tc < 5:
         #print(response["message"])
         ans = response["message"]
         break
-    except:
-        print("Connection issue")
-        time.sleep(1)
+    except Exception as e:
+        print(f"Error: {e}")
 
 
 ans = ans.replace(":", "\n")
