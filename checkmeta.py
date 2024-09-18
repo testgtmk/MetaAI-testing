@@ -6,15 +6,18 @@ import time
 
 ai = MetaAI()
 promptIntro = ""
-ques =  "Enumerate the National Water Policy of India. Taking river Ganges as an example, discuss the strategies which may be adopted for river water pollution control and management. What are the legal provisions of management and handling of hazardous wastes in India?"
+ques =  "Account for the change in the spatial pattern of the Iron and Steel industry in the world. "
 msg = "This question was asked in CSE Mains. Give me approach, keywords and answer of this question. Use data, reports, supreme court judgements to make it more enriching. \n "
 msg += ques
 ans = ""
 
-while True:
+tc = 1
+while tc < 5:
+    tc += 1
+    print(tc)
     try:
         response = ai.prompt(message=msg)
-        print(response["message"])
+        #print(response["message"])
         ans = response["message"]
         break
     except:
@@ -23,8 +26,8 @@ while True:
 
 
 ans = ans.replace(":", "\n")
-
 ans = ques + "\n\n\n" + ans
+
 def send_message(answer):
     while True:
         try:
