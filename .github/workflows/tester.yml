@@ -5,7 +5,7 @@ on:
     types: [event-type-1]
 
 jobs:
-  job1:
+  brogtmk:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
