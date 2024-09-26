@@ -1,7 +1,7 @@
 name: Workflow 1
 
 on:
-  workflow_dispatch:
+  repository_dispatch:
     inputs:
       parameter1:
         description: 'Parameter for Workflow 1'
