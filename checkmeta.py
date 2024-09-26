@@ -1,45 +1,37 @@
-from meta_ai_api import MetaAI
-import telebot
-from dotenv import load_dotenv
-import os
-import time
+import requests
+import re
+from bs4 import BeautifulSoup
 
-promptIntro = ""
-ques =  "Account for the change in the spatial pattern of the Iron and Steel industry in the world. "
-msg = "This question was asked in CSE Mains. Give me approach, keywords and answer of this question. Use data, reports, supreme court judgements to make it more enriching. \n "
-msg += ques
-ans = ""
+def get_youtube_links_from_playlist(playlist_url):
+    # Headers to mimic a real browser request
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'
+    }
+    
+    # Send a GET request to the playlist page
+    response = requests.get(playlist_url, headers=headers)
+    
+    if response.status_code != 200:
+        print(f"Failed to retrieve page. Status code: {response.status_code}")
+        return []
+    
+    pattern = r'{"url":"(/watch\?v=[^"]+)"'
+    #pattern = r"/watch\?v=([^&]+)"
+    matches = re.findall(pattern, response.text)
+    #matches = match = re.search(r"v=([^&]+)", matches)
+    #print(matches)
+    return matches
 
-tc = 1
-while tc < 5:
-    tc += 1
-    print(tc)
-    try:
-        ai = MetaAI()
-        response = ai.prompt(message=msg)
-        #print(response["message"])
-        ans = response["message"]
-        break
-    except Exception as e:
-        print(f"Error: {e}")
+# Example usage
+geog_url = "https://www.youtube.com/playlist?list=PLHPDRwuGud4VhvaZsxpdcwmKcsnH4XKaB"
+playlist_url = "https://www.youtube.com/playlist?list=PLVOgwA_DiGzr4qkdqR78JnRCzEuq-jKnC"
+links = get_youtube_links_from_playlist(geog_url)
 
-
-ans = ans.replace(":", "\n")
-ans = ques + "\n\n\n" + ans
-
-def send_message(answer):
-    while True:
-        try:
-            bot = telebot.TeleBot(TELEGRAM_TOKEN)
-            bot.send_message(CHAT_ID, answer)
-            break
-        except:
-            print("Some issue is happening from server. Lets wait and watch")
-            time.sleep(1)
-
-load_dotenv()
-
-TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
-CHAT_ID = os.getenv('CHAT_ID')
-send_message(ans)
-
+prefix = "https://www.youtube.com"
+# Output the extracted links
+for link in links:
+    decoded_url = link.replace(r'\u0026', '&')
+    match = re.search(r"/watch\?v=([^&]+)", decoded_url)
+    vid = match.group(0)
+    #print(match.group(0),match.group(1))
+    print(prefix+vid)
