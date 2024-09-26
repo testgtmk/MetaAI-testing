@@ -1,14 +1,14 @@
-name: Dispatch Workflow
+name: Wkflow 2
 
 on:
   repository_dispatch:
-    types: [custom-event]
+    types: [event-type-2]
 
 jobs:
-  my_job:
+  job2:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
-      - name: Use custom input
-        run: echo "Heybrothis is yfdsfsour Input value: ${{ github.event.client_payload.my_input }}"
+      - name: Run job 2
+        run: echo "This is my india Workflow 2"
