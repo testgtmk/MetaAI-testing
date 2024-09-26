@@ -15,4 +15,4 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Run a script
-        run: echo "This is Workflow 1 with parameter ${{ github.event.inputs.parameter1 }}"
+        run: echo "Yeah,we are running This is Workflow 1 with parameter ${{ github.event.inputs.parameter1 }}"
