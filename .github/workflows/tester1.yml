@@ -1,0 +1,19 @@
+name: Workflow 2
+
+on:
+  workflow_dispatch:
+    inputs:
+      parameter2:
+        description: 'Parameter for Workflow 2'
+        required: true
+        default: 'TestValToday2'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Run a different script
+        run: echo "This is Workflow 2 with parameter ${{ github.event.inputs.parameter2 }}"
+
