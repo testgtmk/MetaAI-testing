@@ -11,4 +11,4 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v2
       - name: Use custom input
-        run: echo "Hey bro this is your Input value: ${{ github.event.client_payload.my_input }}"
+        run: echo "Heybrothis is yfdsfsour Input value: ${{ github.event.client_payload.my_input }}"
